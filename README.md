@@ -57,7 +57,7 @@ By default resultings will be saved to *./cache/model* directory
 
 ## Results
 
-I trained it for 50 epoch using RMSProp optimization. I got Top-1 accuracy (averaged over all labels) up to ~36% on test subset which is not so bad considering small hidden layer size (still need to check it with larger settings) and large number of labels. For baselines and comparison with other methods I refer to [original paper](https://arxiv.org/abs/1607.01759). The authors have also released pretty fast implementation (https://github.com/facebookresearch/fastText).
+I trained it for 50 epoch using RMSProp optimization. I got Top-1 accuracy (averaged over all labels) up to ~36% on test subset which is not so bad considering **small hidden layer size** (still need to check it with larger settings), **large number of labels**, and **natural labeling ambiguity** (underlying articles had multiple labels). For baselines and comparison with other methods I refer to the [original paper](https://arxiv.org/abs/1607.01759). The authors have also released pretty fast implementation (https://github.com/facebookresearch/fastText).
 
 ![accuracy](images/accuracy.png)
 
@@ -65,7 +65,7 @@ I have used [BBC news articles](http://mlg.ucd.ie/files/datasets/bbc-fulltext.zi
 
 ![accuracy](images/tsne.png)
 
-The model can be used for topic classification, but not other problems - e.g. it cannot capture tweet sentiments right away. In that case I would try to use different data, like predict hash tag based on tweet text.
+The model can be used for topic classification, but not other problems - e.g. it cannot capture tweet sentiments right away. In that case I would try to use different data, like predict hash tag according to tweet text.
 
 ## License
 

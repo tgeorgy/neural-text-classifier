@@ -85,7 +85,7 @@ class model:
         # loss eval
         ids_ = range(batch_size)
         logprobs = -np.log(probs[ids_, lbl_] + eps)
-        loss = np.mean(logprobs*m.label_weight[lbl])
+        loss = np.mean(logprobs*self.label_weight[lbl])
         # loss += (self.w1**2).sum()*l2
         # loss += (self.w01**2).sum()*l2
         # loss += (self.w00**2).sum()*l2
@@ -182,6 +182,7 @@ class model:
 
 
 def main(h_width=64, lr=0.03, rho=0.95, l2=0.0,
+         decay_after=100, decay_rate=0.95,
          batch_size=500, nepochs=50, print_every=100,
          log_file='train.log'):
     # Init model and data
@@ -191,7 +192,6 @@ def main(h_width=64, lr=0.03, rho=0.95, l2=0.0,
         util.preprocess_data(TPATH, MPATH, 'train_data.h5')
         util.collect_train_data(LPATH, MPATH)
 
-    os.dirlist('')
     dl = util.dataLoader(batch_size=batch_size)
 
     label_acc = np.zeros(dl.label_n)
@@ -217,8 +217,8 @@ def main(h_width=64, lr=0.03, rho=0.95, l2=0.0,
     for epochi in range(nepochs):
         loss_acc = 0
 
-        acc_true_pos = np.zeros(label_n)
-        acc_n = np.zeros(label_n)
+        acc_true_pos = np.zeros(dl.label_n)
+        acc_n = np.zeros(dl.label_n)
         t0 = time.time()
 
         if epochi >= decay_after:

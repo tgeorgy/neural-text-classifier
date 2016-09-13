@@ -35,7 +35,7 @@ class model:
         self.h_width = h_width
         self.w1 = np.random.rand(h_width+1, label_n)
         self.w1 = np.float32((self.w1-0.5)*2/h_width**0.5)
-        # initializing output layer bias to approximate softmax
+        # initializing output layer bias for softmax approximation
         # (NCE creiterion)
         self.w1[0, :] += -np.log(label_n)
         self.w1_acc = np.zeros((h_width+1, label_n), dtype=np.float32)
@@ -74,7 +74,7 @@ class model:
         odat1 = odat1-maxv
         # simple approach with constant scale
         # probs = np.exp(odat1) # / 1 : approximation
-        # euristic that helps to scale batch probabilities
+        # plus heuristic that helps to scale batch probabilities
         exp_scores = np.exp(odat1)
         maxv = exp_scores.max(1)
         scale = (exp_scores.sum(1)-maxv)/(odat1.shape[1]-1)
